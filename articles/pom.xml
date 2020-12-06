@@ -11,27 +11,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
-	<profiles>
-		<profile>
-			<id>java_1.8-profile</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-				<jdk>1.8</jdk>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-api</artifactId>
-					<version>2.2.12</version>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.myfaces.core</groupId>
-					<artifactId>myfaces-impl</artifactId>
-					<version>2.2.12</version>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 	<build>
 		<finalName>articles</finalName>
 		<plugins>
@@ -82,67 +61,73 @@
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-atinject_1.0_spec</artifactId>
-			<version>1.1</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jcdi_2.0_spec</artifactId>
-			<version>1.1</version>
+			<artifactId>geronimo-jcdi_1.1_spec</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-interceptor_1.2_spec</artifactId>
-			<version>1.1</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-annotation_1.3_spec</artifactId>
-			<version>1.1</version>
+			<artifactId>geronimo-annotation_1.2_spec</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-spi</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-impl</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-web</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-jsf</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-el22</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-tomcat7</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openwebbeans</groupId>
 			<artifactId>openwebbeans-resource</artifactId>
-			<version>2.0.13</version>
+			<version>1.7.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-asm7-shaded</artifactId>
-			<version>4.13</version>
+			<version>4.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-finder-shaded</artifactId>
-			<version>4.13</version>
+			<version>4.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
 		</dependency>
 	</dependencies>
 </project>
