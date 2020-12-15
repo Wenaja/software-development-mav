@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/stencil.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{loginController.verifyUser()}"
+			type="preRenderView"></f:event>
+		<h:outputScript library="js" name="sha256.js" target="head" />
+		<h:outputScript library="js" name="cfv.js" target="head" />
+		<div class="content">
+			<section> <span name="message"></span> 
+			<h:form id="frm_createNewAccount01" name="frm_createNewAccount" onsubmit="return setupSubmit()">
+				<div class="textfield">
+					<h:outputLabel value="Vorname: " for="inpf_forename01" />
+					<br />
+					<h:inputText onfocus="validate(this)" value="#{newAccountController.user.forename}" id="inpf_forename01" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="textfield">
+					<h:outputLabel value="Nachname: " for="inpf_surname01" />
+					<br />
+					<h:inputText onfocus="validate(this)" value="#{newAccountController.user.surname}" id="inpf_surname01" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="textfield">
+					<h:outputLabel value="Benutzername: " for="inpf_username01" />
+					<br />
+					<h:inputText onfocus="validate(this)" value="#{newAccountController.user.username}" id="inpf_username01" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="textfield">
+					<h:outputLabel value="Email-Adresse: " for="inpf_email01" />
+					<br />
+					<h:inputText onfocus="validate(this)" value="#{newAccountController.user.email}" id="inpf_email01" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="textfield">
+					<h:outputLabel value="Kennwort: " for="inpf_pwd01" />
+					<br />
+					<h:inputSecret onfocus="validate(this)" value="#{newAccountController.user.first_password}" id="inpf_pwd01" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="textfield">
+					<h:outputLabel value="Kennwort: " for="inpf_pwd02" />
+					<br />
+					<h:inputSecret onfocus="validate(this)" value="#{newAccountController.user.second_password}" id="inpf_pwd02" />
+					<span name="message"></span>
+					<br />
+				</div>
+				<div class="hidden">
+					<h:inputHidden id="inpf_hidden01" value="true" />
+				</div>
+				<div class="submit_btn">
+					<h:commandButton id="btn_submit01" name="create_account" value="Abschicken" action="#{newAccountController.foo()}" onclick="validate(this)" />
+				</div>
+			</h:form> 
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

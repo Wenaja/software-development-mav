@@ -19,15 +19,13 @@ public class UserFinderLogChain extends LoginChain {
 	public UserFinderLogChain(String email, String pwd) {
 		this.email = email;
 		this.pwd = pwd;
-
 	}
 
 	@Override
 	public Touchable getTouchable(HttpSession session, User user) throws LoginFailureException {
-		if (!email.isEmpty()) {
-			return new UserFinder(email);
+		if (!this.email.isEmpty()) {
+			return new UserFinder(this.email);
 		}
-
 		throw new LoginFailureException("Bitte, geben Sie Ihre Email-Adresse ein!");
 	}
 

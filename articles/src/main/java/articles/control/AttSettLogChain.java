@@ -21,12 +21,10 @@ public class AttSettLogChain extends LoginChain {
 		this.pwd = pwd;
 	}
 
-	@Override
 	public Touchable getTouchable(HttpSession session, User user) throws LoginFailureException {
-		if (user.getActive()) {
+		if (user.getActive().booleanValue()) {
 			return new AttributeSetter(user.getId());
 		}
-
 		throw new LoginFailureException("Ihr Benutzerkonto wurde deaktiviert. Mit allen Fragen wenden Sie sich an den Anministrator.");
 	}
 }

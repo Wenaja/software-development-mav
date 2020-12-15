@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#login_form{
+	width: 400px;
+	padding: 20px;
+	margin:auto;
+}
+
+div.textfield{
+	margin: 15px 15px 10px 150px;
+}
+
+div.submit_btn{
+	margin: 15px 15px 10px 150px;
+}

@@ -34,32 +34,26 @@ public class UserLoginController implements Serializable {
 	public String makeLogin() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		StorageManager storageManager = new StorageManager();
-
-		LoginChain log = new UserFinderLogChain(email, pwd);
-		log.setNextChain(new StoragerLogChain(email, pwd));
-		log.getNextChain().setNextChain(new AttSettLogChain(email, pwd));
-
+		UserFinderLogChain log = new UserFinderLogChain(this.email, this.pwd);
+		log.setNextChain((LoginChain) new StoragerLogChain(this.email, this.pwd));
+		log.getNextChain().setNextChain((LoginChain) new AttSettLogChain(this.email, this.pwd));
 		try {
 			log.runChainThrough(storageManager, session, new User());
-			
 		} catch (LoginFailureException e) {
-			// Miss messge
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
 					"verstehe ich nicht wozu das hier dient"));
-
 			return "login?faces-redirect=false";
 		}
-
-		return "home?faces-redirect=true";
+		return "index?faces-redirect=true";
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public String getPwd() {
-		return pwd;
+		return this.pwd;
 	}
 
 	public void setEmail(String email) {

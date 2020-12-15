@@ -24,60 +24,52 @@ public class LoginController implements Serializable {
 
 	public void verifyLogin() {
 		try {
-			HttpSession session = getSession(getExtContext());
-			if (!isLogged(session)) {
-				doRedirect("login.jsf");
+			final HttpSession session = this.getSession(this.getExtContext());
+			if (!this.isLogged(session)) {
+				this.doRedirect("login.jsf");
 			}
 		} catch (Exception e) {
-			doRedirect("login.jsf");
+			this.doRedirect("login.jsf");
 		}
 	}
 
 	public void verifyUser() {
 		try {
-			HttpSession session = getSession(getExtContext());
-			if (isLogged(session)) {
-				doRedirect("userSettings.jsf");
+			final HttpSession session = this.getSession(this.getExtContext());
+			if (this.isLogged(session)) {
+				this.doRedirect("userSettings.jsf");
 			}
 		} catch (Exception e) {
-			doRedirect("userSettings.jsf");
+			this.doRedirect("userSettings.jsf");
 		}
 	}
 
 	private ExternalContext getExtContext() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-
+		final FacesContext fc = FacesContext.getCurrentInstance();
 		return fc.getExternalContext();
 	}
 
-	private HttpSession getSession(ExternalContext ec) throws Exception {
-		HttpSession session = (HttpSession) ec.getSession(false);
-
+	private HttpSession getSession(final ExternalContext ec) throws Exception {
+		final HttpSession session = (HttpSession) ec.getSession(false);
 		if (session == null) {
 			throw new Exception();
 		}
-
 		return session;
 	}
 
-	private boolean isLogged(HttpSession session) {
+	private boolean isLogged(final HttpSession session) {
 		boolean active = false;
-
 		if (session.getAttribute("active") != null) {
 			active = (boolean) session.getAttribute("active");
 		}
-
 		return active;
 	}
 
-	private void doRedirect(String url) {
-		ExternalContext extContext = getExtContext();
-
+	private void doRedirect(final String url) {
+		final ExternalContext extContext = this.getExtContext();
 		try {
 			extContext.redirect(url);
-		} catch (IOException e) {
-			// missing function
+		} catch (IOException ex) {
 		}
 	}
-
 }

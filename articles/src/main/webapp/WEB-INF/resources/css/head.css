@@ -1,0 +1,328 @@
+@charset "UTF-8";
+
+html {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-style: normal;
+    font-size: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #ffffff;
+    color: #343434;
+    font-size: 0.875em;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+
+div#page {
+    background: url("#{resource['graphics:background.png']}") repeat-y;
+    min-height: 100%;
+    padding-bottom: 0em;
+}
+
+header {
+    box-shadow: 0 3px 3px gray;
+    font-size: 1.375em;
+    margin: 0px;
+    padding: 0px;
+    position: sticky;
+    top: 0;
+}
+
+header ul {
+    list-style-type: none;
+    display: inline;
+}
+
+header ul li {
+    display: inline;
+}
+
+nav {
+    float: right;
+    font-size: 0.75em;
+    margin-top: 15px;
+    margin-bottom: 14px;
+    padding-top: 29px;
+    padding-bottom: 29px;
+}
+
+div#mp-clear {
+    margin: 0px;
+    padding: 0px;
+}
+
+div#header-top {
+    background-color: #dc143c;
+    color: #ffffff;
+    display: block;
+    font-size: 0.625em;
+    margin: 0px;
+    padding: 0px;
+    text-align: left; 
+    width: 100%;
+}
+
+div#navi-top {
+    display: block;
+    max-width: 1038px;
+    margin: 0px auto;
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+div#navi-top-left {
+    float: left;
+    margin: 0px;
+    text-align: left;
+}
+
+div#navi-top-right {
+    float: right;
+    margin: 0px;
+}
+
+div#header-bottom {
+    background-color: #000000;
+    color: #000000;
+}
+
+div#logo-navi-bottom {
+    max-width: 1038px;
+    min-width: 595px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+div.logo {
+    background-color: #000000;
+    float: left;
+    margin-left: 0px;
+}
+
+.clear {
+    margin: 0;
+    padding: 0px;
+}
+
+.clear li {
+    margin-right: 5px;
+}
+
+.not-clear {
+    margin-right: 0px;
+    padding: 15px;
+}
+
+.not-clear li {
+    margin-left: 15px;
+}
+
+.special {
+    clear: both;
+}
+
+main {
+    margin-top: 0px;
+    padding-bottom: 12em;
+}
+
+main.with-aside {
+    margin-right: 380px;
+}
+
+div#body-of-site {
+    max-width: 1038px;
+    min-width: 595px;
+	margin: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+div.content {
+    margin: 0;
+    padding: 0;
+}
+
+/* ################ FOOTER ################### */
+
+div#page-footer {
+    height: 11.75em;
+    margin-top: -11.75em;
+}
+
+footer {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-top: -1em;
+	color: #FFF;
+	background-color: #000;
+	display: block;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 1em;
+	font-style: normal;
+}
+
+div.foot-level-one {
+	padding: 10px 0;
+	margin-bottom: 1em;
+	background: #090909;
+	border-bottom: 2px solid #222;
+	border-top: 5px solid #E8CE0E;
+}
+
+div.foot-level-two {
+	max-width: 1038px;
+	min-width: 595px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.foot-level-three {
+	margin-left: -15px;
+	margin-right: -15px;
+	overflow: hidden;
+}
+
+div.foot-level-four {
+	width: 100%;
+	float: left;
+	position: relative;
+	min-height: 2px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+div.foot-level-five {
+	text-align: center;
+}
+
+div.footer-level-one {
+    max-width: 1038px;
+	min-width: 595px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.footer-level-two {
+	margin-left: -15px;
+	margin-right: -15px;
+    overflow: hidden;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+div#footer-created {
+	width: 50%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+div#footer-hosted {
+	width: 44%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: right;
+}
+
+/* ################ LINKS #################### */
+
+a {
+    text-decoration: none;
+    color: #0000CC;
+}
+
+a:active, a:hover, a:visited {
+    text-decoration: none;
+    color: #0000CC;
+}
+
+nav a:link, a:visited {
+    border-radius: 3px;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #E8CE0E;
+    color: #4D4D4D;
+    padding: 10px;
+    text-decoration: none;
+}
+
+nav a:active {
+    background-color: #E8CE0E;
+    color: #4D4D4D;
+    padding: 10px;
+    text-decoration: none;
+}
+
+div#navi-top-left a:link, a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+div#navi-top-left a:hover, a:active {
+	text-decoration: none;
+	color: #FFFFFF;
+	background-color: #DC143C;
+}
+
+div#navi-top-right a:link, a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+div#navi-top-right a:hover, a:active {
+	text-decoration: none;
+	color: #FFFFFF;
+	background-color: #DC143C;
+}
+
+div.foot-level-five a:link, a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+div.logo a:link, a:visited {
+    background: #000000;
+    text-decoration: none;
+}
+
+div.logo a:hover, a:active {
+    background-color: #000000;
+    text-decoration: none;
+}
+
+div.foot-level-five a:hover, a:active {
+    background-color: #000000;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+div#footer-hosted a:link, a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+div#footer-hosted a:hover, a:active {
+    background-color: #000000;
+    color: #FFFFFF;
+    text-decoration: none;
+}

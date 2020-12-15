@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/stencil.xhtml">
+
+	<ui:define name="content">
+	    <h1><h:outputText value="Ihr Benutzerkonto wurde erfolgreich erstellt"/></h1>
+	    <h:outputText value="#{newAccountController.user.forename}"/><br />
+	    <h:outputText value="#{newAccountController.user.surname}"/><br />
+	    <h:outputText value="#{newAccountController.user.username}"/><br />
+	    <h:outputText value="#{newAccountController.user.email}"/><br />
+	    <h:outputText value="#{newAccountController.user.first_password}"/><br />
+	    <h:outputText value="#{newAccountController.user.second_password}" />
+	</ui:define>
+</ui:composition>
+</html>

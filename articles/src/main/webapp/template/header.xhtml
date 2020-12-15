@@ -1,0 +1,47 @@
+?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition>		
+
+		<div id="mp-clear">
+			<div id="header-top">
+				<div id="navi-top">
+					<div id="navi-top-left">
+						<ul class="clear">
+							<li><h:outputText value="Meine persönliche Webseite"/></li>
+						</ul>
+					</div>
+					<div id="navi-top-right">
+						<ul class="clear">
+							<li><h:link value="#{pageHandler.loginValue}" outcome="#{pageHandler.loginOutcome}" /></li>
+							<li><h:outputText value="|" /></li>
+							<li><h:link value="#{pageHandler.value}" outcome="#{pageHandler.outcome}" /></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="header-bottom">
+				<div id="logo-navi-bottom">
+					<div class="logo">
+						<h:outputLink value="home.jsf"><h:graphicImage library="graphics" name="sd_logo.png" alt="logo" width="468px" /></h:outputLink>
+					</div>
+					<nav>
+						<ul class="not-clear">
+							<li><h:link value="Startseite" outcome="home" /></li>
+							<li><h:link value="Tutorials" outcome="ide-tutorial" /></li>
+							<li><h:link value="Web Applikationen" outcome="webApps" /></li>
+						</ul>
+					</nav>
+					<div class="special"></div>
+				</div>
+			</div>
+		</div>
+
+	</ui:composition>
+</html>

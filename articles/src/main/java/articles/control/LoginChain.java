@@ -22,19 +22,17 @@ public abstract class LoginChain implements Serializable {
 	}
 
 	public LoginChain getNextChain() {
-		return next;
+		return this.next;
 	}
 
-	public void runChainThrough(StorageManager storageManager, HttpSession session, User user)
-			throws LoginFailureException {
-		storageManager.setNextOperation(getTouchable(session, user));
+	public void runChainThrough(StorageManager storageManager, HttpSession session, User user) throws LoginFailureException {
+		storageManager.setNextOperation(this.getTouchable(session, user));
 		user = storageManager.execute(StorageManager.getEntityManager());
-
-		if (next != null) {
-			next.runChainThrough(storageManager, session, user);
+		
+		if (this.next != null) {
+			this.next.runChainThrough(storageManager, session, user);
 		}
-
 	}
 
-	abstract Touchable getTouchable(HttpSession session, User user) throws LoginFailureException;
+	abstract Touchable getTouchable(HttpSession var1, User var2) throws LoginFailureException;
 }
