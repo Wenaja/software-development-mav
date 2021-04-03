@@ -8,5 +8,5 @@ import javax.persistence.EntityManager;
 import articles.model.Article;
 
 public interface Articable extends Serializable {
-	List<Article> fillRecords(EntityManager em);
+	public List<Article> fillRecords(EntityManager var1);
 }

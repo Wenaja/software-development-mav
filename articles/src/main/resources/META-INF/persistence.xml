@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd ">
-	<persistence-unit name="articles" >
+	<persistence-unit name="articles" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:comp/env/jdbc/articlesDB</jta-data-source>
 		<class>articles.model.Article</class>
@@ -11,5 +11,10 @@
 		<class>articles.model.Comment</class>
 		<class>articles.model.Title</class>
 		<class>articles.model.User</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB53Dialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="validate"/>
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+		</properties>
 	</persistence-unit>
 </persistence>

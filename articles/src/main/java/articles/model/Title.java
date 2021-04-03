@@ -33,16 +33,15 @@ public class Title implements Serializable {
 	private Integer id;
 
 	@Column(name = "caption")
-	private String caption;
-
-	//bi-directional many-to-one association to Article
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="titleBean")
-	private List<Article> articles = null;
-
-	//bi-directional many-to-one association to Category
+	private String caption; 
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
+
+	//bi-directional many-to-one association to Article
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="title")
+	private List<Article> articles = null;
 
 	public Title() {
 	}
@@ -62,11 +61,18 @@ public class Title implements Serializable {
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
+	
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public List<Article> getArticles() {
 		if(articles == null) {
-			this.articles = new ArrayList<Article>();
-			
+			this.articles = new ArrayList<Article>();		
 		}
 		
 		return this.articles;
@@ -78,24 +84,47 @@ public class Title implements Serializable {
 
 	public Article addArticle(Article article) {
 		getArticles().add(article);
-		article.setTitleBean(this);
+		article.setTitle(this);
 
 		return article;
 	}
 
 	public Article removeArticle(Article article) {
 		getArticles().remove(article);
-		article.setTitleBean(null);
+		article.setTitle(null);
 
 		return article;
 	}
 
-	public Category getCategory() {
-		return this.category;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((caption == null) ? 0 : caption.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Title other = (Title) obj;
+		if (caption == null) {
+			if (other.caption != null)
+				return false;
+		} else if (!caption.equals(other.caption))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override
@@ -106,8 +135,6 @@ public class Title implements Serializable {
 		builder.append(id);
 		builder.append(", caption=");
 		builder.append(caption);
-		builder.append(", category=");
-		builder.append(category);
 		builder.append("]");
 		
 		return builder.toString();

@@ -2,7 +2,11 @@ package articles.control;
 
 import java.io.Serializable;
 
+import articles.model.User;
+
 /**
+ * @author Juri Rempel
+ * @version 1.0
  * 
  */
 public class SQLInjectInspector implements Serializable {

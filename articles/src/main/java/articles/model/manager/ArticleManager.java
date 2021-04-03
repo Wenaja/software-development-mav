@@ -10,13 +10,13 @@ import articles.model.Article;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
 public class ArticleManager implements Serializable {
 	private static final long serialVersionUID = -2473272877474757284L;
 	private Articable article;
 
 	public ArticleManager() {
-
 	}
 
 	public ArticleManager(Articable article) {
@@ -28,7 +28,6 @@ public class ArticleManager implements Serializable {
 	}
 
 	public List<Article> fillRecords(EntityManager em) {
-		return article.fillRecords(em);
+		return this.article.fillRecords(em);
 	}
-
 }

@@ -9,27 +9,25 @@ import javax.persistence.TypedQuery;
 import articles.model.Article;
 
 /**
- * @author Juri Rempel
- * @version 1.0
  * 
  */
-public class JPAArticleEntrance implements Articable {
-	private static final long serialVersionUID = 3756161048318223497L;
-
-	public JPAArticleEntrance() {
-
+public class StartPageArticleEntrance implements Articable {
+	private static final long serialVersionUID = 7929303837973963229L;
+	
+	public StartPageArticleEntrance() {
+		
 	}
 
 	@Override
 	public List<Article> fillRecords(EntityManager em) {
 		TypedQuery<Article> query = em.createQuery("SELECT a FROM Article a", Article.class);
-		List<Article> results = query.getResultList();
+		List<Article> result = query.getResultList();
 		ArrayList<Article> articles = new ArrayList<Article>();
-		String category = "JPA";
+		String CATEGORY = "Startseite";
 		
-		for (Article a : results) {
-			String JPA = a.getTitle().getCategory().getArticlecategory();
-			if (!category.equals(JPA))
+		for (Article a : result) {
+			String Willkommen = a.getTitle().getCategory().getArticlecategory();
+			if (!CATEGORY.equals(Willkommen))
 				continue;
 			articles.add(a);
 		}
@@ -40,4 +38,5 @@ public class JPAArticleEntrance implements Articable {
 		
 		return articles;
 	}
+
 }

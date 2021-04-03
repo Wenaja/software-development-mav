@@ -10,6 +10,7 @@ import articles.model.User;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
 public class AttributeSetter implements Touchable {
 	private static final long serialVersionUID = -1096259654510139030L;
@@ -19,21 +20,20 @@ public class AttributeSetter implements Touchable {
 		this.user_id = user_id;
 	}
 
-	@Override
 	public User execute(EntityManager em) throws NoMatchUserException {
-		User user = em.find(User.class, user_id);
+		User user = (User) em.find(User.class, (Object) this.user_id);
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-		session.setAttribute("user_id", user.getId());
-		session.setAttribute("active", user.getActive());
-		session.setAttribute("email", user.getEmail());
-		session.setAttribute("forename", user.getForename());
-		session.setAttribute("surname", user.getSurname());
-		session.setAttribute("username", user.getUsername());
-
+		session.setAttribute("user_id", (Object) user.getId());
+		session.setAttribute("active", (Object) user.getActive());
+		session.setAttribute("email", (Object) user.getEmail());
+		session.setAttribute("forename", (Object) user.getForename());
+		session.setAttribute("surname", (Object) user.getSurname());
+		session.setAttribute("username", (Object) user.getUsername());
 		em.close();
-
 		return user;
 	}
 
+	public void persist(EntityManager em, User user) {
+		em.close();
+	}
 }

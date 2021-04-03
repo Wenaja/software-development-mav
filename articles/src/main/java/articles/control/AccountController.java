@@ -2,15 +2,28 @@ package articles.control;
 
 import java.io.Serializable;
 
+import articles.exceptions.AccountAlreadyExistException;
+import articles.exceptions.NoMatchUserException;
+import articles.exceptions.SQLInjectException;
+import articles.model.User;
+import articles.model.manager.Beanable;
+import articles.model.manager.StorageManager;
+import articles.model.manager.Storager;
+import articles.model.manager.Touchable;
+import articles.model.manager.UserFinder;
+
 /**
+ * @author Juri Rempel
+ * @version 1.0
  * 
  */
 public class AccountController implements Serializable {
 	private static final long serialVersionUID = -7105625137843736169L;
-	private Beanable newAccontsBean;
+	//private Beanable newAccontsBean;
 
 	public AccountController(Beanable newAccountsBean) {
-		this.newAccontsBean = newAccountsBean;
+		//this.newAccontsBean = newAccountsBean;
+		//TODO: wozu hier Beanable?
 	}
 
 	public String createFor(User user) throws AccountAlreadyExistException, SQLInjectException {

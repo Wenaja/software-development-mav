@@ -32,14 +32,9 @@ public class Category implements Serializable {
 
 	@Column(name = "articlecategory")
 	private String articlecategory;
-
-	//bi-directional many-to-one association to Comment
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="category")
-	private List<Comment> comments = null;
-
-	//bi-directional many-to-one association to Title
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="category")
-	private List<Title> titles = null;
+	
+	@OneToMany(mappedBy="category", fetch=FetchType.LAZY)
+    private List<Title> titles;
 
 	public Category() {
 	}
@@ -60,36 +55,9 @@ public class Category implements Serializable {
 		this.articlecategory = articlecategory;
 	}
 
-	public List<Comment> getComments() {
-		if(comments == null) {
-			this.comments = new ArrayList<Comment>();
-		}
-		
-		return this.comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public Comment addComment(Comment comment) {
-		getComments().add(comment);
-		comment.setCategory(this);
-
-		return comment;
-	}
-
-	public Comment removeComment(Comment comment) {
-		getComments().remove(comment);
-		comment.setCategory(null);
-
-		return comment;
-	}
-
 	public List<Title> getTitles() {
-		if(titles == null) {
-			this.titles = new ArrayList<Title>();
-			
+		if(this.titles == null) {
+			titles = new ArrayList<Title>();
 		}
 		
 		return this.titles;
@@ -106,11 +74,42 @@ public class Category implements Serializable {
 		return title;
 	}
 
-	public Title removeTitle(Title title) {
+	public Title removeArticle(Title title) {
 		getTitles().remove(title);
 		title.setCategory(null);
 
 		return title;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((articlecategory == null) ? 0 : articlecategory.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Category other = (Category) obj;
+		if (articlecategory == null) {
+			if (other.articlecategory != null)
+				return false;
+		} else if (!articlecategory.equals(other.articlecategory))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override

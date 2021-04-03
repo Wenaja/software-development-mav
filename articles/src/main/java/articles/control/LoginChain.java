@@ -12,7 +12,9 @@ import articles.model.manager.Touchable;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
+
 public abstract class LoginChain implements Serializable {
 	private static final long serialVersionUID = 3191814935382515362L;
 	private LoginChain next = null;

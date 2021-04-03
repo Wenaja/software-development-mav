@@ -8,5 +8,7 @@ import articles.exceptions.NoMatchUserException;
 import articles.model.User;
 
 public interface Touchable extends Serializable {
-	User execute(EntityManager em) throws NoMatchUserException;
+	public void persist(EntityManager em, User user);
+	public User execute(EntityManager em) throws NoMatchUserException;
+
 }

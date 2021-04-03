@@ -16,29 +16,25 @@ public class IDEArticleEntrance implements Articable {
 	private static final long serialVersionUID = -3907079594547691780L;
 
 	public IDEArticleEntrance() {
-		
+
 	}
-	
+
 	@Override
 	public List<Article> fillRecords(EntityManager em) {
 		TypedQuery<Article> query = em.createQuery("SELECT a FROM Article a", Article.class);
 		List<Article> result = query.getResultList();
-
-		List<Article> articles = new ArrayList<Article>();
+		ArrayList<Article> articles = new ArrayList<Article>();
 		String category = "IDE";
-		String IDE;
-
+		
 		for (Article a : result) {
-			IDE = a.getCategory().getArticlecategory();
-
-			if (category.equals(IDE)) {
-				articles.add(a);
-			}
+			String IDE = a.getTitle().getCategory().getArticlecategory();
+			if (!category.equals(IDE))
+				continue;
+			articles.add(a);
 		}
-
-		if (em.isOpen())
+		if (em.isOpen()) {
 			em.close();
-
+		}
 		return articles;
 	}
 

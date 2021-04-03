@@ -11,14 +11,16 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author Juri Rempel
- * @author 1.0
+ * @version 1.0
+ * BEMERKUNG: kann kein Controller sein, da ViewBean --> muss umbenannt werden!
  */
+
 @Named
 @RequestScoped
-public class LoginController implements Serializable {
+public class LoginControllerViewBean implements Serializable {
 	private static final long serialVersionUID = 5795758240108533110L;
 
-	public LoginController() {
+	public LoginControllerViewBean() {
 
 	}
 

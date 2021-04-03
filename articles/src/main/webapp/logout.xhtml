@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,11 +8,12 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/template/stencil.xhtml">
-
 	<ui:define name="content">
-	    <f:event listener="#{loginController.verifyLogin()}" type="preRenderView"></f:event>
+
+		<f:event listener="#{loginController.verifyLogin()}" type="preRenderView" />
 		<div class="content">
-			<h:form>
+			<div class="container">
+				<h1>Abmelden</h1>
 				<h:panelGrid columns="2">
 					<h:outputText value="Benutzername: " />
 					<h:outputText value="#{logoutBean.username}" />
@@ -21,13 +23,19 @@
 					<h:outputText value="#{logoutBean.loginTime}" />
 					<h:outputText value="Dauer der Sitzung: " />
 					<h:outputText value="#{logoutBean.loginDuration}" />
-
-					<h:commandButton action="home?faces-redirect=true" id="back_btn01" value="Zurück zur Startseite" />
-					<h:commandButton action="#{logoutBean.makeLogout()}" id="logout_btn01" value="Sitzung beenden" />
-
 				</h:panelGrid>
-			</h:form>
+			</div>
+			<div class="container">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:commandButton action="index?faces-redirect=true" id="back_btn01" value="zur Startseite" />
+						<h:commandButton action="#{logoutBean.makeLogout()}" id="logout_btn01" value="Sitzung beenden" />
+					</h:panelGrid>
+				</h:form>
+			</div>
 		</div>
+
 	</ui:define>
 </ui:composition>
+
 </html>

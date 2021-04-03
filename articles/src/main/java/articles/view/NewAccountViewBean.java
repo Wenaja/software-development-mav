@@ -2,7 +2,18 @@ package articles.view;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
+import articles.control.AccountController;
+import articles.exceptions.AccountAlreadyExistException;
+import articles.exceptions.SQLInjectException;
+import articles.model.User;
+import articles.model.manager.Beanable;
+
 /**
+ * @author Juri Rempel
+ * @version 1.0
  * 
  */
 public class NewAccountViewBean implements Serializable {

@@ -8,12 +8,12 @@ import java.io.Serializable;
  */
 public class UserCompositeObject implements Serializable {
 	private static final long serialVersionUID = -7132830371496777366L;
-	private String forename;
-	private String surname;
-	private String username;
-	private String email;
-	private String first_password;
-	private String second_password;
+	private String forename = "";
+	private String surname = "";
+	private String username = "";
+	private String email = "";
+	private String first_password = "";
+	private String second_password = "";
 
 	public UserCompositeObject() {
 

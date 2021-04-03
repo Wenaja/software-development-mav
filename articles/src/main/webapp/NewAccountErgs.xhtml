@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,15 +8,26 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/template/stencil.xhtml">
-
 	<ui:define name="content">
-	    <h1><h:outputText value="Ihr Benutzerkonto wurde erfolgreich erstellt"/></h1>
-	    <h:outputText value="#{newAccountController.user.forename}"/><br />
-	    <h:outputText value="#{newAccountController.user.surname}"/><br />
-	    <h:outputText value="#{newAccountController.user.username}"/><br />
-	    <h:outputText value="#{newAccountController.user.email}"/><br />
-	    <h:outputText value="#{newAccountController.user.first_password}"/><br />
-	    <h:outputText value="#{newAccountController.user.second_password}" />
+
+		<h1>
+			<h:outputText value="Ihr Benutzerkonto wurde erfolgreich erstellt" />
+		</h1>
+		<div class="content">
+			<h4>Sie konnen sich nun mit Ihrer Email-Adresse und Kennwort auf der Seite anmelden</h4>
+			<h:outputText value="#{newAccountController.user.forename}" />
+			<br />
+			<h:outputText value="#{newAccountController.user.surname}" />
+			<br />
+			<h:outputText value="#{newAccountController.user.username}" />
+			<br />
+			<h:outputText value="#{newAccountController.user.email}" />
+			<br />
+			<h:outputText value="#{newAccountController.user.first_password}" />
+			<br />
+			<h:outputText value="#{newAccountController.user.second_password}" />
+		</div>
+
 	</ui:define>
 </ui:composition>
 </html>

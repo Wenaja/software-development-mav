@@ -8,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import articles.model.Article;
+import articles.model.manager.Articable;
 import articles.model.manager.ArticleManager;
 import articles.model.manager.IDEArticleEntrance;
 import articles.model.manager.JPAArticleEntrance;
@@ -17,7 +18,9 @@ import articles.model.manager.StorageManager;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
+
 @Named
 @RequestScoped
 public class WebAppsContentViewBean implements Serializable {
@@ -35,19 +38,19 @@ public class WebAppsContentViewBean implements Serializable {
 	}
 
 	public List<Article> getIDEArticles() {
-		artMan.setArticleEntrance(new IDEArticleEntrance());
+		artMan.setArticleEntrance((Articable)new IDEArticleEntrance());
 
 		return artMan.fillRecords(StorageManager.getEntityManager());
 	}
 
 	public List<Article> getJPAArticles() {
-		artMan.setArticleEntrance(new JPAArticleEntrance());
+		artMan.setArticleEntrance((Articable)new JPAArticleEntrance());
 
 		return artMan.fillRecords(StorageManager.getEntityManager());
 	}
 
 	public List<Article> getJSFArticles() {
-		artMan.setArticleEntrance(new JSFArticleEntrance());
+		artMan.setArticleEntrance((Articable)new JSFArticleEntrance());
 
 		return artMan.fillRecords(StorageManager.getEntityManager());
 

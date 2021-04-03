@@ -5,9 +5,11 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta charset="utf-8"/>
-	<title>Default title</title>
-	<h:outputStylesheet library="css" name="head.css" />
-	<h:outputStylesheet library="css" name="forms.css" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
+	<title>Software Development</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<h:outputStylesheet library="css" name="main.css" />
+	<h:outputStylesheet library="css" name="slide.css" />
 </h:head>
 
 <h:body>
@@ -20,11 +22,11 @@
 		</header>
 
 		<main>
-		<div id="body-of-site">
-			<ui:insert name="content">
+			<div id="body-of-site">
+				<ui:insert name="content">
 
-			</ui:insert>
-		</div>
+				</ui:insert>
+			</div>
 		</main>
 	</div>
 
@@ -34,6 +36,15 @@
 		</ui:insert>
 	</div>
 
+	<!-- JavaScript for Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<!-- JavaScript for Security -->
+	<h:outputScript library="js" name="sha256.js" />
+	<h:outputScript library="js" name="encodePWD.js" />
+	<h:outputScript library="js" name="cfv.js" />
 </h:body>
 
 </html>

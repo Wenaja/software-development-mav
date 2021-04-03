@@ -1,4 +1,4 @@
-?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -19,9 +19,9 @@
 					</div>
 					<div id="navi-top-right">
 						<ul class="clear">
-							<li><h:link value="#{pageHandler.loginValue}" outcome="#{pageHandler.loginOutcome}" /></li>
+							<li><h:link value="#{pageHandlerViewBean.loginValue}" outcome="#{pageHandlerViewBean.loginOutcome}" /></li>
 							<li><h:outputText value="|" /></li>
-							<li><h:link value="#{pageHandler.value}" outcome="#{pageHandler.outcome}" /></li>
+							<li><h:link value="#{pageHandlerViewBean.value}" outcome="#{pageHandlerViewBean.outcome}" /></li>
 						</ul>
 					</div>
 				</div>
@@ -29,13 +29,13 @@
 			<div id="header-bottom">
 				<div id="logo-navi-bottom">
 					<div class="logo">
-						<h:outputLink value="home.jsf"><h:graphicImage library="graphics" name="sd_logo.png" alt="logo" width="468px" /></h:outputLink>
+						<h:outputLink value="index.jsf"><h:graphicImage library="graphics" name="sd_logo.png" alt="logo" width="468px" /></h:outputLink>
 					</div>
 					<nav>
 						<ul class="not-clear">
-							<li><h:link value="Startseite" outcome="home" /></li>
-							<li><h:link value="Tutorials" outcome="ide-tutorial" /></li>
-							<li><h:link value="Web Applikationen" outcome="webApps" /></li>
+							<li><h:link value="Startseite" outcome="index?faces-redirect=true" /></li>
+							<li><h:link value="Tutorials" outcome="ide-tutorial?faces-redirect=true" /></li>
+							<li><h:link value="Web Anwendungen" outcome="webApps?faces-redirect=true" /></li>
 						</ul>
 					</nav>
 					<div class="special"></div>

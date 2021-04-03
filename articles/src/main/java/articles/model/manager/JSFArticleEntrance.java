@@ -14,30 +14,28 @@ import articles.model.Article;
  */
 public class JSFArticleEntrance implements Articable {
 	private static final long serialVersionUID = 4353078071237658602L;
-	
+
 	public JSFArticleEntrance() {
-		
+
 	}
 
 	@Override
 	public List<Article> fillRecords(EntityManager em) {
 		TypedQuery<Article> query = em.createQuery("SELECT a FROM Article a", Article.class);
 		List<Article> results = query.getResultList();
-
-		List<Article> articles = new ArrayList<Article>();
+		ArrayList<Article> articles = new ArrayList<Article>();
 		String category = "JSF";
-		String JSF;
 
 		for (Article a : results) {
-			JSF = a.getCategory().getArticlecategory();
-
-			if (category.equals(JSF)) {
-				articles.add(a);
-			}
+			String JSF = a.getTitle().getCategory().getArticlecategory();
+			if (!category.equals(JSF))
+				continue;
+			articles.add(a);
 		}
 
-		if (em.isOpen())
+		if (em.isOpen()) {
 			em.close();
+		}
 
 		return articles;
 	}

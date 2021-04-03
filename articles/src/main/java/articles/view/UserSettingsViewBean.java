@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
+
 @Named
 @RequestScoped
 public class UserSettingsViewBean implements Serializable {
@@ -23,46 +25,41 @@ public class UserSettingsViewBean implements Serializable {
 	private String numberComments = "---";
 	private String accountCreatedOn = "---";
 
-	public UserSettingsViewBean() {
-
-	}
-
 	@PostConstruct
 	public void initialize() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
 		if (session != null) {
-			surname = (String) session.getAttribute("surname");
-			forename = (String) session.getAttribute("forename");
-			username = (String) session.getAttribute("username");
-			email = (String) session.getAttribute("email");
-			numberComments = "0";
-			accountCreatedOn = "01.01.2018";
+			this.surname = (String) session.getAttribute("surname");
+			this.forename = (String) session.getAttribute("forename");
+			this.username = (String) session.getAttribute("username");
+			this.email = (String) session.getAttribute("email");
+			this.numberComments = "0";
+			this.accountCreatedOn = "01.01.2018";
 		}
 	}
 
 	public String getSurname() {
-		return surname;
+		return this.surname;
 	}
 
 	public String getForename() {
-		return forename;
+		return this.forename;
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public String getNumberComments() {
-		return numberComments;
+		return this.numberComments;
 	}
 
 	public String getAccountCreatedOn() {
-		return accountCreatedOn;
+		return this.accountCreatedOn;
 	}
 
 	public void setSurname(String surname) {
@@ -88,5 +85,4 @@ public class UserSettingsViewBean implements Serializable {
 	public void setAccountCreatedOn(String accountCreatedOn) {
 		this.accountCreatedOn = accountCreatedOn;
 	}
-
 }

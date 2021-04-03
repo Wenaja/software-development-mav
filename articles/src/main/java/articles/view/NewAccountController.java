@@ -4,12 +4,19 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+import javax.sql.DataSource;
 
 import articles.model.User;
 import articles.model.dco.UserCompositeObject;
@@ -23,18 +30,24 @@ import articles.model.dco.UserCompositeObject;
 public class NewAccountController implements Serializable {
 	private static final long serialVersionUID = -6172552035246225005L;
 	private UserCompositeObject user = null;
-	private EntityManagerFactory emf;
+	// private EntityManagerFactory emf;
+
+	@PersistenceContext(unitName = "articles")
 	private EntityManager em;
+	@Resource(name = "jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = javax.sql.DataSource.class)
+	private UserTransaction userTransaction;
 
 	public NewAccountController() {
-
+		
 	}
 
 	@PostConstruct
 	private void initilize() {
 		user = new UserCompositeObject();
-		this.emf = Persistence.createEntityManagerFactory("net.software-development");
-		em = emf.createEntityManager();
+		/*
+		 * this.emf = Persistence.createEntityManagerFactory("articles"); em =
+		 * emf.createEntityManager();
+		 */
 	}
 
 	public UserCompositeObject getUser() {
@@ -60,32 +73,60 @@ public class NewAccountController implements Serializable {
 	}
 
 	public String foo() {
-		System.out.println("Vom Formular an den Server angekommen: ");
-		System.out.println("Vorname: " + user.getForename());
-		System.out.println("Nachname: " + user.getSurname());
-		System.out.println("Benutzername: " + user.getUsername());
-		System.out.println("Email: " + user.getEmail());
-		System.out.println("Erstes Kennwort: " + user.getFirst_password());
-		System.out.println("zweites Kennwort: " + user.getSecond_password());
+		try {
+			em.joinTransaction();
+			userTransaction.begin();
 
-		if (!isUserExist()) {
-			User youngUser = new User();
+			if (!isUserExist()) {
 
-			youngUser.setForename(user.getForename());
-			youngUser.setSurname(user.getSurname());
-			youngUser.setUsername(user.getUsername());
-			youngUser.setEmail(user.getEmail());
-			youngUser.setActive(new Boolean(true));
-			youngUser.setPwd(user.getSecond_password());
+				User youngUser = new User();
 
-			em.getTransaction().begin();
-			em.persist(youngUser);
-			em.getTransaction().commit();
+				youngUser.setForename(user.getForename());
+				youngUser.setSurname(user.getSurname());
+				youngUser.setUsername(user.getUsername());
+				youngUser.setEmail(user.getEmail());
+				youngUser.setActive(new Boolean(true));
+				youngUser.setPwd(user.getSecond_password());
 
-			return "NewAccountErgs?faces-redirect=true";
-		} else {
+				em.persist(youngUser);
+				userTransaction.commit();
+
+				return "NewAccountErgs?faces-redirect=true";
+
+			}
+
+		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			try {
+				em.getTransaction().rollback();
+			} catch (IllegalStateException | SecurityException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
 			return "NewAccountFail?faces-redirect=true";
+
 		}
 
+		return "NewAccountFail?faces-redirect=true";
+
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("Aus dem Formular in Server angekommen:  [Vorname=");
+		if (user != null) {
+			builder.append(user.getForename());
+			builder.append(", Nachname=");
+			builder.append(user.getSurname());
+			builder.append(", Benutzername=");
+			builder.append(user.getUsername());
+			builder.append(", Email=");
+			builder.append(user.getEmail());
+		}
+		builder.append("]");
+
+		return builder.toString();
+	}
+
 }

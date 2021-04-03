@@ -19,15 +19,22 @@ import articles.model.manager.StorageManager;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
+ * BEMERKUNGEN:
+ * 1. kann nicht Controller heißen, da ViewBean
+ * 2. ist auch keine Bean, da nicht nur setter und getter
+ * MUSS Umbenannt werden
+ * 
  */
+
 @Named
 @RequestScoped
-public class UserLoginController implements Serializable {
+public class UserLoginControllerViewBean implements Serializable {
 	private static final long serialVersionUID = -4612346300356170300L;
 	private String email;
 	private String pwd;
 
-	public UserLoginController() {
+	public UserLoginControllerViewBean() {
 
 	}
 
@@ -37,6 +44,7 @@ public class UserLoginController implements Serializable {
 		UserFinderLogChain log = new UserFinderLogChain(this.email, this.pwd);
 		log.setNextChain((LoginChain) new StoragerLogChain(this.email, this.pwd));
 		log.getNextChain().setNextChain((LoginChain) new AttSettLogChain(this.email, this.pwd));
+		
 		try {
 			log.runChainThrough(storageManager, session, new User());
 		} catch (LoginFailureException e) {
@@ -45,6 +53,7 @@ public class UserLoginController implements Serializable {
 					"verstehe ich nicht wozu das hier dient"));
 			return "login?faces-redirect=false";
 		}
+		
 		return "index?faces-redirect=true";
 	}
 

@@ -10,7 +10,9 @@ import articles.model.manager.Touchable;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
+
 public class StoragerLogChain extends LoginChain {
 	private static final long serialVersionUID = 4319979392246717939L;
 

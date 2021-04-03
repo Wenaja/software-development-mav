@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
+ * BEMERKUNG: der Name ist womoeglich nicht so passend
  */
+
 @Named
 @RequestScoped
-public class PageHandler implements Serializable {
+public class PageHandlerViewBean implements Serializable {
 	private static final long serialVersionUID = 3056054091072640427L;
 	private String value = "Benutzerkonto erstellen";
     private String outcome = "createAccount";

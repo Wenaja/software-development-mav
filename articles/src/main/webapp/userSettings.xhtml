@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,28 +8,32 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/template/stencil.xhtml">
-
 	<ui:define name="content">
-	    <f:event listener="#{loginController.verifyLogin()}" type="preRenderView" />
-	    <div class="content">
-	    	<h:panelGrid columns="2">
-	    		<h:outputText value="Nachname: "/>
-	    		<h:outputText value="#{userSettings.surname}"/>
-	    		<h:outputText value="Vorname: "/>
-	    		<h:outputText value="#{userSettings.forename}"/>
-	    		<h:outputText value="Benutzername: "/>
-	    		<h:outputText value="#{userSettings.username}"/>
-	    		<h:outputText value="Email-Adresse: "/>
-	    		<h:outputText value="#{userSettings.email}"/>
-	    		<h:outputText value="Anzahl Kommentare: "/>
-	    		<h:outputText value="#{userSettings.numberComments}"/>
-	    		<h:outputText value="Benutzerkonto erstellt am: "/>
-	    		<h:outputText value="#{userSettings.accountCreatedOn}"/>
-	    		<h:form>
-	    			<h:commandButton action="home?faces-redirect=true" id="btn_back01" value="Zurück zur Startseite"/>
-	    		</h:form>
-	    	</h:panelGrid>
-	    </div>
+
+		<f:event listener="#{loginController.verifyLogin()}" type="preRenderView" />
+		<div class="content">
+			<div class="container">
+				<h1>Benutzerdaten</h1>
+				<h:panelGrid columns="2">
+					<h:outputText value="Nachname: " />
+					<h:outputText value="#{userSettings.surname}" />
+					<h:outputText value="Vorname: " />
+					<h:outputText value="#{userSettings.forename}" />
+					<h:outputText value="Benutzername: " />
+					<h:outputText value="#{userSettings.username}" />
+					<h:outputText value="Email-Adresse: " />
+					<h:outputText value="#{userSettings.email}" />
+					<h:outputText value="Anzahl Kommentare: " />
+					<h:outputText value="#{userSettings.numberComments}" />
+					<h:outputText value="Benutzerkonto erstellt am: " />
+					<h:outputText value="#{userSettings.accountCreatedOn}" />
+					<h:form>
+						<h:commandButton action="index?faces-redirect=true"
+							id="btn_back01" value="zur Startseite" />
+					</h:form>
+				</h:panelGrid>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

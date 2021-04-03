@@ -15,8 +15,11 @@ import javax.servlet.http.HttpSession;
 import articles.model.User;
 
 /**
+ * @author Juri Rempel
+ * @version 1.0
  * 
  */
+
 @Named
 @RequestScoped
 public class LogoutViewBean implements Serializable {
@@ -26,43 +29,33 @@ public class LogoutViewBean implements Serializable {
 	private Long loginTime = 0L;
 	private String loginDuration = "---";
 
-	public LogoutViewBean() {
-
-	}
-
 	@PostConstruct
 	public void initialize() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
 		if (session != null) {
-			username = (String) session.getAttribute("username");
-			email = (String) session.getAttribute("email");
-			loginTime = session.getCreationTime();
-			loginDuration = "0";
+			this.username = (String) session.getAttribute("username");
+			this.email = (String) session.getAttribute("email");
+			this.loginTime = session.getCreationTime();
+			this.loginDuration = "0";
 		}
 	}
 
 	public String makeLogout() {
-
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("net.software-development");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory((String) "software-development.net");
 		EntityManager em = emf.createEntityManager();
 		Integer userId = (Integer) session.getAttribute("user_id");
-		User user = em.find(User.class, userId);
-
+		User user = (User) em.find(User.class, (Object) userId);
 		em.getTransaction().begin();
-		user.setSession(null);
+		user.setSessionID(null);
 		em.getTransaction().commit();
 		em.close();
-
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
-		return "home?faces-redirect=true";
+		return "index?faces-redirect=true";
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -70,7 +63,7 @@ public class LogoutViewBean implements Serializable {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -78,7 +71,7 @@ public class LogoutViewBean implements Serializable {
 	}
 
 	public String getLoginTime() {
-		Date dt = new Date(loginTime);
+		Date dt = new Date(this.loginTime);
 		return dt.toString();
 	}
 
@@ -87,11 +80,10 @@ public class LogoutViewBean implements Serializable {
 	}
 
 	public String getLoginDuration() {
-		return loginDuration;
+		return this.loginDuration;
 	}
 
 	public void setLoginDuration(String loginDuration) {
 		this.loginDuration = loginDuration;
 	}
-
 }

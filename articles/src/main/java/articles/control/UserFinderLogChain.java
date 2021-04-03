@@ -10,7 +10,9 @@ import articles.model.manager.UserFinder;
 /**
  * @author Juri Rempel
  * @version 1.0
+ * 
  */
+
 public class UserFinderLogChain extends LoginChain {
 	private static final long serialVersionUID = 2435900642308260746L;
 	private String email;
@@ -26,6 +28,7 @@ public class UserFinderLogChain extends LoginChain {
 		if (!this.email.isEmpty()) {
 			return new UserFinder(this.email);
 		}
+		
 		throw new LoginFailureException("Bitte, geben Sie Ihre Email-Adresse ein!");
 	}
 

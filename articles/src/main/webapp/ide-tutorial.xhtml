@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,17 +7,29 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:composition template="/tempelate/stencil.xhtml">
-
+<ui:composition template="/template/stencil.xhtml">
 	<ui:define name="content">
-	    <div class="content">
-			<h1>Tutorialseite</h1>
-			<section>
-				<ui:repeat var="pageContent" value="#{ideTutorialPage.IDEArticles}">
-					<h:outputText value="#{pageContent.article}" escape="false" />
-				</ui:repeat>
-			</section>
+		
+		<div class="content">
+			<div class="container">
+				<article> 
+					<section>
+						<h1>Java 8 EE Vorbereiten</h1><br />
+						<ui:repeat var="pageContent" value="#{ideTutorialPage.IDEArticles}">
+							<h:outputText value="#{pageContent.article}" escape="false" /><br />
+						</ui:repeat> 
+					</section> 
+				</article>
+			</div>
 		</div>
+		
+	<!-- JavaScript for Slide Gallery -->
+	<h:outputScript library="js" name="slideMotor.js"/>
+	<script>window.onload = function () {
+        setNecessaryNumberOfDots(2);
+        setNecessaryNumberOfDots(3);
+    }</script>
 	</ui:define>
 </ui:composition>
+
 </html>
