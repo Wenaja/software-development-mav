@@ -16,7 +16,6 @@ import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-import javax.sql.DataSource;
 
 import articles.model.User;
 import articles.model.dco.UserCompositeObject;
@@ -34,11 +33,12 @@ public class NewAccountController implements Serializable {
 
 	@PersistenceContext(unitName = "articles")
 	private EntityManager em;
-	@Resource(name = "jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = javax.sql.DataSource.class)
-	private UserTransaction userTransaction;
+	@Resource(name = "jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = org.apache.tomcat.dbcp.dbcp2.BasicDataSource.class)
+	//private UserTransaction userTransaction;
+	private org.apache.tomcat.dbcp.dbcp2.BasicDataSource dataSource;
 
 	public NewAccountController() {
-		
+
 	}
 
 	@PostConstruct
@@ -48,6 +48,7 @@ public class NewAccountController implements Serializable {
 		 * this.emf = Persistence.createEntityManagerFactory("articles"); em =
 		 * emf.createEntityManager();
 		 */
+		dataSource.getConnection();
 	}
 
 	public UserCompositeObject getUser() {
@@ -95,7 +96,8 @@ public class NewAccountController implements Serializable {
 
 			}
 
-		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
 			try {
 				em.getTransaction().rollback();
 			} catch (IllegalStateException | SecurityException e1) {
