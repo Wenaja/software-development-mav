@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.HeuristicMixedException;
@@ -33,9 +34,9 @@ public class NewAccountController implements Serializable {
 
 	@PersistenceContext(unitName = "articles")
 	private EntityManager em;
-	@Resource(name = "jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = org.apache.tomcat.dbcp.dbcp2.BasicDataSource.class)
-	//private UserTransaction userTransaction;
-	private org.apache.tomcat.dbcp.dbcp2.BasicDataSource dataSource;
+	@Resource(name = "java:comp/env/jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = javax.sql.DataSource.class)
+	private UserTransaction userTransaction;
+	// private org.apache.tomcat.dbcp.dbcp2.BasicDataSource dataSource;
 
 	public NewAccountController() {
 
@@ -48,7 +49,6 @@ public class NewAccountController implements Serializable {
 		 * this.emf = Persistence.createEntityManagerFactory("articles"); em =
 		 * emf.createEntityManager();
 		 */
-		dataSource.getConnection();
 	}
 
 	public UserCompositeObject getUser() {
@@ -74,12 +74,33 @@ public class NewAccountController implements Serializable {
 	}
 
 	public String foo() {
+		System.out.print("foo ===> ");
+
+		if (em.isOpen()) {
+			System.out.println("em is open");
+		} else {
+			System.out.println("em is close");
+		}
+
 		try {
-			em.joinTransaction();
-			userTransaction.begin();
-
+			if (userTransaction == null) {
+				System.out.println("foo ==> userTransaction is NULL");
+				EntityTransaction et = em.getTransaction();
+				if(et != null) {
+					if(et.isActive()) {
+						System.out.print("EntityTransaction not NULL and active!");
+					}else {
+						System.out.print("EntityTransaction not NULL but no active :(");
+					}
+				}
+				et.begin();
+				et.rollback();
+				return "NewAccountFail?faces-redirect=true";
+			} else {
+				userTransaction.begin();
+			}
+			
 			if (!isUserExist()) {
-
 				User youngUser = new User();
 
 				youngUser.setForename(user.getForename());
@@ -90,21 +111,22 @@ public class NewAccountController implements Serializable {
 				youngUser.setPwd(user.getSecond_password());
 
 				em.persist(youngUser);
-				userTransaction.commit();
-
-				return "NewAccountErgs?faces-redirect=true";
 
 			}
+
+			userTransaction.commit();
 
 		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
 				| HeuristicMixedException | HeuristicRollbackException e) {
 			try {
-				em.getTransaction().rollback();
-			} catch (IllegalStateException | SecurityException e1) {
+				userTransaction.rollback();
+
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
 				e1.printStackTrace();
+
 			}
+
 			e.printStackTrace();
-			return "NewAccountFail?faces-redirect=true";
 
 		}
 
