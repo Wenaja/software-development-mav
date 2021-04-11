@@ -12,7 +12,9 @@
 		<class>articles.model.Title</class>
 		<class>articles.model.User</class>
 		<properties>
-			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/articlesDB"/>
+			<property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
+			<property name="jta.UserTransaction" value="java:comp/env/jdbc/articlesDB"/>
+			<!-- <property name="hibernate.connection.datasource" value="java:comp/env/jdbc/articlesDB"/> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB103Dialect"/>
 		</properties>
 	</persistence-unit>

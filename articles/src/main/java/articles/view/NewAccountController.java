@@ -8,17 +8,13 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
-import articles.model.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import articles.model.dco.UserCompositeObject;
 
 /**
@@ -36,6 +32,8 @@ public class NewAccountController implements Serializable {
 	private EntityManager em;
 	@Resource(name = "java:comp/env/jdbc/articlesDB", authenticationType = javax.annotation.Resource.AuthenticationType.CONTAINER, type = javax.sql.DataSource.class)
 	private UserTransaction userTransaction;
+
+	// private SessionContext sessionContext;
 	// private org.apache.tomcat.dbcp.dbcp2.BasicDataSource dataSource;
 
 	public NewAccountController() {
@@ -74,61 +72,45 @@ public class NewAccountController implements Serializable {
 	}
 
 	public String foo() {
-		System.out.print("foo ===> ");
+		if (!em.isOpen()) {
+			return "NewAccountFail?faces-redirect=true";
+		}
 
-		if (em.isOpen()) {
-			System.out.println("em is open");
+		Session session;
+		if (userTransaction != null) {
+			System.out.println("cool!");
+		}
+		Transaction transaction;
+
+		session = em.unwrap(Session.class);
+
+		if (session.isJoinedToTransaction()) {
+			System.out.println("session is joined Transaction");
 		} else {
-			System.out.println("em is close");
+			System.out.println("session is NOT joined Transaction");
 		}
-
-		try {
-			if (userTransaction == null) {
-				System.out.println("foo ==> userTransaction is NULL");
-				EntityTransaction et = em.getTransaction();
-				if(et != null) {
-					if(et.isActive()) {
-						System.out.print("EntityTransaction not NULL and active!");
-					}else {
-						System.out.print("EntityTransaction not NULL but no active :(");
-					}
-				}
-				et.begin();
-				et.rollback();
-				return "NewAccountFail?faces-redirect=true";
-			} else {
-				userTransaction.begin();
-			}
-			
-			if (!isUserExist()) {
-				User youngUser = new User();
-
-				youngUser.setForename(user.getForename());
-				youngUser.setSurname(user.getSurname());
-				youngUser.setUsername(user.getUsername());
-				youngUser.setEmail(user.getEmail());
-				youngUser.setActive(new Boolean(true));
-				youngUser.setPwd(user.getSecond_password());
-
-				em.persist(youngUser);
-
-			}
-
-			userTransaction.commit();
-
-		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
-				| HeuristicMixedException | HeuristicRollbackException e) {
-			try {
-				userTransaction.rollback();
-
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				e1.printStackTrace();
-
-			}
-
-			e.printStackTrace();
-
-		}
+		/*
+		 * session.getTransaction().begin(); if (session.isOpen()) {
+		 * System.out.println("session is open"); } else {
+		 * System.out.println("session is NOT open"); } if (session.isConnected()) {
+		 * System.out.println("session is currently connected"); } else {
+		 * System.out.println("session is NOT connected"); } try { transaction =
+		 * session.beginTransaction(); if(transaction.isActive())
+		 * System.out.print("Transaction is active!"); }catch(Exception exc) {
+		 * System.out.println("begin Transaction is fail with the message: " +
+		 * exc.getMessage()); } } //userTransaction =
+		 * session.unwrap(UserTransaction.class);
+		 * 
+		 * if (!isUserExist()) { User youngUser = new User();
+		 * 
+		 * youngUser.setForename(user.getForename());
+		 * youngUser.setSurname(user.getSurname());
+		 * youngUser.setUsername(user.getUsername());
+		 * youngUser.setEmail(user.getEmail()); youngUser.setActive(new Boolean(true));
+		 * youngUser.setPwd(user.getSecond_password());
+		 * 
+		 * em.persist(youngUser); } session.getTransaction().commit();
+		 */
 
 		return "NewAccountFail?faces-redirect=true";
 
